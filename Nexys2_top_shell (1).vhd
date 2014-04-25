@@ -186,7 +186,7 @@ LED <= CLOCKBUS_SIG(26 DOWNTO 19);
 --Instantiate the design you with to implement below and start wiring it up!:
 -----------------------------------------------------------------------------
 Inst_PRISM: PRISM PORT MAP(
-		Clock => ClockBus_sig(23),
+		Clock => ClockBus_sig(21),
 		Reset_L => not btn(3),
 	--	Control_Bus => ,
 		Input_0 => switch(3 downto 0),
