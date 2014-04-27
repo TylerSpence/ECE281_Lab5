@@ -1,181 +1,181 @@
 		   00	   7	LDAI	0		N	1	Y
 		   01	   0				Y	0	N
-		   02	   D	STA	B1		N	2	Y
+		   02	   D	STA	B1	clears values	N	2	Y
 		   03	   1				Y	0	N
 		   04	   B				Y	0	N
-		   05	   D	STA	B0		N	2	Y
+		   05	   D	STA	B0	clears values	N	2	Y
 		   06	   0				Y	0	N
 		   07	   B				Y	0	N
 		   08	   0	NOP			N	0	Y
-	Start	   09	   5	IN	0		N	1	Y
+	Start	   09	   5	IN	0	start of the loop;determines direction of count	N	1	Y
 		   0A	   0				Y	0	N
-		   0B	   B	JN	minus		N	2	Y
-		   0C	   D				Y	0	N
+		   0B	   B	JN	minus	jumps to the subtraction loop	N	2	Y
+		   0C	   A				Y	0	N
 		   0D	   2				Y	0	N
-		   0E	   9	JMP	Add		N	2	Y
-		   0F	   4				Y	0	N
+		   0E	   9	JMP	Add	jumps to the addition loop	N	2	Y
+		   0F	   1				Y	0	N
 		   10	   1				Y	0	N
-		   11	   0	NOP			N	0	Y
-		   12	   0	NOP			N	0	Y
-		   13	   0	NOP			N	0	Y
-	Add	   14	   F	LDAD	B0		N	2	Y
-		   15	   0				Y	0	N
-		   16	   B				Y	0	N
-		   17	   6	ADDI	1		N	1	Y
-		   18	   1				Y	0	N
-		   19	   D	STA	B0		N	2	Y
-		   1A	   0				Y	0	N
-		   1B	   B				Y	0	N
-		   1C	   6	ADDI	6		N	1	N
-		   1D	   6				Y	0	N
-		   1E	   A	JZ	Positive		N	2	N
-		   1F	   2				Y	0	N
-		   20	   5				Y	0	N
-		   21	   F	LDAD	B0		N	2	N
-		   22	   0				Y	0	N
-		   23	   B				Y	0	N
-		   24	   0	NOP			N	0	N
-		   25	   0	NOP			N	0	N
-		   26	   4	OUT	2		N	1	Y
-		   27	   2				Y	0	N
-		   28	   0	NOP			N	0	Y
-		   29	   9	JMP	Start	Goes back to beggining	N	2	Y
-		   2A	   9				Y	0	N
-		   2B	   0				Y	0	N
-		   2C	   0	NOP			N	0	Y
-	minus	   2D	   0	NOP			N	0	Y
-		   2E	   7	LDAI	1		N	1	Y
-		   2F	   1				Y	0	N
-		   30	   1	NEG			N	0	Y
-		   31	   E	ADDD	B0		N	2	Y
+	Add	   11	   F	LDAD	B0		N	2	Y
+		   12	   0				Y	0	N
+		   13	   B				Y	0	N
+		   14	   6	ADDI	1		N	1	Y
+		   15	   1				Y	0	N
+		   16	   D	STA	B0	adds one to the stored value	N	2	Y
+		   17	   0				Y	0	N
+		   18	   B				Y	0	N
+		   19	   6	ADDI	6	tests to see if the transition is from a 9 to the 10 value above it	N	1	N
+		   1A	   6				Y	0	N
+		   1B	   A	JZ	Positive	if it is a 10 value, jumps to a different logic set...	N	2	N
+		   1C	   3				Y	0	N
+		   1D	   4				Y	0	N
+		   1E	   F	LDAD	B0	...otherwise loads...	N	2	N
+		   1F	   0				Y	0	N
+		   20	   B				Y	0	N
+		   21	   0	NOP			N	0	N
+		   22	   0	NOP			N	0	N
+		   23	   4	OUT	2	...and outputs the next value	N	1	Y
+		   24	   2				Y	0	N
+		   25	   0	NOP			N	0	Y
+		   26	   9	JMP	Start	Goes back to beggining	N	2	Y
+		   27	   9				Y	0	N
+		   28	   0				Y	0	N
+		   29	   0	NOP			N	0	Y
+	minus	   2A	   0	NOP		start of subracting one from the lsb	N	0	Y
+		   2B	   7	LDAI	1		N	1	Y
+		   2C	   1				Y	0	N
+		   2D	   1	NEG		adds negative one	N	0	Y
+		   2E	   E	ADDD	B0	adds the stored lsb to it	N	2	Y
+		   2F	   0				Y	0	N
+		   30	   B				Y	0	N
+		   31	   D	STA	B0	stores the result	N	2	Y
 		   32	   0				Y	0	N
 		   33	   B				Y	0	N
-		   34	   D	STA	B0		N	2	Y
-		   35	   0				Y	0	N
-		   36	   B				Y	0	N
-		   37	   6	ADDI	1		N	1	N
-		   38	   1				Y	0	N
-		   39	   A	JZ	Negative		N	2	N
+		   34	   6	ADDI	1	checks to see if result causes the number to drop from 1 to 0	N	1	N
+		   35	   1				Y	0	N
+		   36	   A	JZ	Negative	if it does, jumps to a different operation	N	2	N
+		   37	   1				Y	0	N
+		   38	   7				Y	0	N
+		   39	   F	LDAD	B0	if not, it simly reloads the value of the lsb...	N	2	N
 		   3A	   0				Y	0	N
-		   3B	   8				Y	0	N
-		   3C	   F	LDAD	B0		N	2	N
-		   3D	   0				Y	0	N
-		   3E	   B				Y	0	N
-		   3F	   0	NOP			N	0	N
-		   40	   0	NOP			N	0	N
+		   3B	   B				Y	0	N
+		   3C	   4	OUT	2	...and outputs it	N	1	Y
+		   3D	   2				Y	0	N
+		   3E	   9	JMP	Start	goes back to beggining	N	2	Y
+		   3F	   9				Y	0	N
+		   40	   0				Y	0	N
 		   41	   0	NOP			N	0	N
 		   42	   0	NOP			N	0	N
-		   43	   4	OUT	2		N	1	Y
-		   44	   2				Y	0	N
-		   45	   A	JZ	Negative		N	2	Y
-		   46	   0				Y	0	N
-		   47	   8				Y	0	N
-		   48	   9	JMP	Start	Goes back to beggining	N	2	Y
-		   49	   9				Y	0	N
-		   4A	   0				Y	0	N
-		   4B	   0	NOP			N	0	N
+	Positive	   43	   0	NOP		start of adding one to the msb and changing the other digit to 0	N	0	Y
+		   44	   F	LDAD	B1	loads msb	N	2	Y
+		   45	   1				Y	0	N
+		   46	   B				Y	0	N
+		   47	   6	ADDI	1	adds one to msb	N	1	Y
+		   48	   1				Y	0	N
+		   49	   D	STA	B1		N	2	Y
+		   4A	   1				Y	0	N
+		   4B	   B				Y	0	N
 		   4C	   0	NOP			N	0	N
-		   4D	   0	NOP			N	0	N
-		   4E	   0	NOP			N	0	N
-		   4F	   0	NOP			N	0	N
-		   50	   0	NOP			N	0	N
-		   51	   0	NOP			N	0	N
-	Positive	   52	   0	NOP			N	0	Y
-		   53	   F	LDAD	B1		N	2	Y
-		   54	   1				Y	0	N
-		   55	   B				Y	0	N
-		   56	   6	ADDI	1		N	1	Y
-		   57	   1				Y	0	N
-		   58	   D	STA	B1		N	2	Y
-		   59	   1				Y	0	N
-		   5A	   B				Y	0	N
-		   5B	   0	NOP			N	0	N
-		   5C	   7	LDAI	0		N	1	N
-		   5D	   0				Y	0	N
-		   5E	   D	STA	B0		N	2	N
-		   5F	   0				Y	0	N
-		   60	   B				Y	0	N
-		   61	   4	OUT	2		N	1	N
-		   62	   2				Y	0	N
-		   63	   F	LDAD	B1		N	2	N
-		   64	   1				Y	0	N
-		   65	   B				Y	0	N
-		   66	   6	ADDI	6		N	1	N
-		   67	   6				Y	0	N
-		   68	   A	JZ	workone		N	2	N
-		   69	   5				Y	0	N
-		   6A	   7				Y	0	N
-		   6B	   F	LDAD	B1		N	2	N
-		   6C	   1				Y	0	N
-		   6D	   B				Y	0	N
-		   6E	   0	NOP			N	0	N
-		   6F	   0	NOP			N	0	N
-		   70	   4	OUT	1		N	1	Y
-		   71	   1				Y	0	N
-		   72	   9	JMP	Start	Goes back to beggining	N	2	N
+		   4D	   7	LDAI	0	loads 0	N	1	N
+		   4E	   0				Y	0	N
+		   4F	   D	STA	B0	stores to lsb	N	2	N
+		   50	   0				Y	0	N
+		   51	   B				Y	0	N
+		   52	   4	OUT	2	and outputs it	N	1	N
+		   53	   2				Y	0	N
+		   54	   F	LDAD	B1		N	2	N
+		   55	   1				Y	0	N
+		   56	   B				Y	0	N
+		   57	   6	ADDI	6	checks to see if there is a transition from 99 to 00	N	1	N
+		   58	   6				Y	0	N
+		   59	   A	JZ	workone	if there is, goes to a different logic set	N	2	N
+		   5A	   6				Y	0	N
+		   5B	   6				Y	0	N
+		   5C	   F	LDAD	B1		N	2	N
+		   5D	   1				Y	0	N
+		   5E	   B				Y	0	N
+		   5F	   0	NOP			N	0	N
+		   60	   0	NOP			N	0	N
+		   61	   4	OUT	1	if not, loads value from above	N	1	Y
+		   62	   1				Y	0	N
+		   63	   9	JMP	Start	Goes back to beggining	N	2	N
+		   64	   9				Y	0	N
+		   65	   0				Y	0	N
+	workone	   66	   7	LDAI	0	makes msb 0 for the transition from 99 to 00	N	1	N
+		   67	   0				Y	0	N
+		   68	   D	STA	B1		N	2	N
+		   69	   1				Y	0	N
+		   6A	   B				Y	0	N
+		   6B	   0	NOP			N	0	N
+		   6C	   4	OUT	1	outputs the 0	N	1	Y
+		   6D	   1				Y	0	N
+		   6E	   9	JMP	Start	Goes back to beggining	N	2	N
+		   6F	   9				Y	0	N
+		   70	   0				Y	0	N
+	Negative	   71	   0	NOP		start of subtracting one from the msb and changing the other digit to 9	N	0	Y
+		   72	   7	LDAI	9	makes lsb 9	N	1	N
 		   73	   9				Y	0	N
-		   74	   0				Y	0	N
-	workone	   75	   7	LDAI	0		N	1	N
-		   76	   0				Y	0	N
-		   77	   D	STA	B1		N	2	N
-		   78	   1				Y	0	N
-		   79	   B				Y	0	N
-		   7A	   0	NOP			N	0	N
-		   7B	   4	OUT	1		N	1	Y
-		   7C	   1				Y	0	N
-		   7D	   9	JMP	Start	Goes back to beggining	N	2	N
-		   7E	   9				Y	0	N
-		   7F	   0				Y	0	N
-	Negative	   80	   0	NOP			N	0	Y
-		   81	   7	LDAI	9		N	1	N
-		   82	   9				Y	0	N
-		   83	   D	STA	B0		N	2	N
-		   84	   0				Y	0	N
-		   85	   B				Y	0	N
-		   86	   4	OUT	2		N	1	N
-		   87	   2				Y	0	N
-		   88	   7	LDAI	1		N	1	Y
-		   89	   1				Y	0	N
-		   8A	   1	NEG			N	0	Y
-		   8B	   E	ADDD	B1		N	2	Y
-		   8C	   1				Y	0	N
-		   8D	   B				Y	0	N
-		   8E	   D	STA	B1		N	2	N
-		   8F	   1				Y	0	N
-		   90	   B				Y	0	N
-		   91	   6	ADDI	1		N	1	N
-		   92	   1				Y	0	N
-		   93	   A	JZ	worktwo		N	2	N
-		   94	   0				Y	0	N
-		   95	   A				Y	0	N
-		   96	   F	LDAD	B1		N	2	N
+		   74	   D	STA	B0		N	2	N
+		   75	   0				Y	0	N
+		   76	   B				Y	0	N
+		   77	   4	OUT	2		N	1	N
+		   78	   2				Y	0	N
+		   79	   7	LDAI	1		N	1	Y
+		   7A	   1				Y	0	N
+		   7B	   1	NEG		loads a negative 1	N	0	Y
+		   7C	   E	ADDD	B1	adds it to the msb	N	2	Y
+		   7D	   1				Y	0	N
+		   7E	   B				Y	0	N
+		   7F	   D	STA	B1	stores msb	N	2	N
+		   80	   1				Y	0	N
+		   81	   B				Y	0	N
+		   82	   6	ADDI	1	check to see if its the transition from 00 to 99	N	1	N
+		   83	   1				Y	0	N
+		   84	   A	JZ	worktwo	jumps to make the msb nine	N	2	N
+		   85	   0				Y	0	N
+		   86	   9				Y	0	N
+		   87	   F	LDAD	B1	if not going to 99, outputs the msb	N	2	N
+		   88	   1				Y	0	N
+		   89	   B				Y	0	N
+		   8A	   4	OUT	1	if not going to 99, outputs the msb	N	1	Y
+		   8B	   1				Y	0	N
+		   8C	   0	NOP			N	0	Y
+		   8D	   9	JMP	Start	Goes back to beggining	N	2	Y
+		   8E	   9				Y	0	N
+		   8F	   0				Y	0	N
+	worktwo	   90	   0	NOP		process of making the msb 9	N	0	Y
+		   91	   7	LDAI	9	loads	N	1	Y
+		   92	   9				Y	0	N
+		   93	   D	STA	B1	stores 9 to the value...	N	2	Y
+		   94	   1				Y	0	N
+		   95	   B				Y	0	N
+		   96	   4	OUT	1	...and outputs it	N	1	Y
 		   97	   1				Y	0	N
-		   98	   B				Y	0	N
-		   99	   4	OUT	1		N	1	Y
-		   9A	   1				Y	0	N
+		   98	   9	JMP	Start	Goes back to beggining	N	2	Y
+		   99	   9				Y	0	N
+		   9A	   0				Y	0	N
 		   9B	   0	NOP			N	0	Y
-		   9C	   9	JMP	Start	Goes back to beggining	N	2	Y
-		   9D	   9				Y	0	N
-		   9E	   0				Y	0	N
-	worktwo	   9F	   0	NOP			N	0	Y
-		   A0	   7	LDAI	9		N	1	Y
-		   A1	   9				Y	0	N
-		   A2	   D	STA	B1		N	2	Y
-		   A3	   1				Y	0	N
-		   A4	   B				Y	0	N
-		   A5	   4	OUT	1		N	1	Y
-		   A6	   1				Y	0	N
-		   A7	   9	JMP	Start	Goes back to beggining	N	2	Y
-		   A8	   9				Y	0	N
-		   A9	   0				Y	0	N
-		   AA	   0	NOP			N	0	Y
-		   AB	   0	NOP			N	0	Y
-		   AC	   0	NOP			N	0	Y
-		   AD	   0	NOP			N	0	Y
-		   AE	   0	NOP			N	0	Y
-		   AF	   0	NOP			N	0	Y
-	B0	   B0	   3	
-	B1	   B1	   2	
+		   9C	   0	NOP			N	0	Y
+		   9D	   0	NOP			N	0	Y
+		   9E	   0	NOP			N	0	Y
+		   9F	   0	NOP			N	0	Y
+		   A0	   0	NOP			N	0	Y
+		   A1	   0	NOP			N	0	N
+		   A2	   0	NOP			N	0	N
+		   A3	   0	NOP			N	0	N
+		   A4	   0	NOP			N	0	N
+		   A5	   0	NOP			N	0	N
+		   A6	   0	NOP			N	0	N
+		   A7	   0	NOP			N	0	N
+		   A8	   0	NOP			N	0	N
+		   A9	   0	NOP			N	0	N
+		   AA	   0	NOP			N	0	N
+		   AB	   0	NOP			N	0	N
+		   AC	   0	NOP			N	0	N
+		   AD	   0	NOP			N	0	N
+		   AE	   0	NOP			N	0	N
+		   AF	   0	NOP			N	0	N
+	B0	   B0	   9	
+	B1	   B1	   9	
 	B2	   B2	   0	
 	B3	   B3	   0	
 		   B4	   0	
