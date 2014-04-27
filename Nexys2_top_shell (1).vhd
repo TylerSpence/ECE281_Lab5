@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Company: USAFA
--- Engineer: Silva
+-- Engineer: Spence
 -- 
 -- Create Date:    12:43:25 07/07/2012 
 -- Module Name:    Nexys2_Lab3top - Behavioral 
