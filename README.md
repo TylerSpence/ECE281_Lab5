@@ -38,6 +38,18 @@ By analyzing the piece of PRISM code provided to us, I determined that the code 
 
 #Discussion of first program instruction cycles.
 
+Below is the first 70 ns of the waveform
+![alt tag] (https://raw.githubusercontent.com/TylerSpence/ECE281_Lab5/master/initial%20screenshot.png)
+
+The value on the op sel is loaded from the ir on a rising edge every three clock cycles as to be expected from the instuction cycle. On the third clock cycle, the opsel is 7 and the data is 8, resulting in the accumulator becoming 8. On the sixth clock cycle, the opsel is 6 and the operand is 1, resulting in 1 being added to 8. 
+
+below is 70 ns through the jump of the waveform
+![alt tag] (https://raw.githubusercontent.com/TylerSpence/ECE281_Lab5/master/jump%20screenshot.png)
+
+At approx 97 ns (the last instruction took two clock cycles instead of one), the opsel becomes 4 and the address 3, outputting the accumulator to port 3. 
+
+Though it cannot be seen on this picture, jumpsel becomes 1 at approx 125 ns, resulting in the program going back to the beggining and opsel being 6 at 167ns, starting the program over again.
+
 #Discussion of second part prism program.
 
 The second program works according to the following logic chart.
