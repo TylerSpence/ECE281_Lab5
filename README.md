@@ -59,7 +59,7 @@ As seen in the comments for the actual code, it checks for the transition betwee
 
 #Answer to Prism Questions
 
-1.	When the controller’s current state is “FETCH,” what is the status of the following control lines:
+ 1	When the controller’s current state is “FETCH,” what is the status of the following control lines:
 
 a.	PCLd-1
 
@@ -67,28 +67,28 @@ b.	IRLd-0
 
 c.	ACCLd-0
 
-2.	The current state is Decode LoAddr and the IR contains “OUT.”  What are the control signals asserted, and what will the next state be?
+ 2	The current state is Decode LoAddr and the IR contains “OUT.”  What are the control signals asserted, and what will the next state be?
 
 
 The next state will be Direct I/O Execute and the control signls Marlold and pcld will be asserted.
 
 
 
-3.	What are the three status signals sent from the PRISM datapath to the PRISM controller?
+ 3	What are the three status signals sent from the PRISM datapath to the PRISM controller?
 
 irld
 jumpsel
 pcld
 
 
-4.	Why is it important that ACCLd signal be active during the execute state for the ADDI instruction?
+ 4	Why is it important that ACCLd signal be active during the execute state for the ADDI instruction?
 
 
 Because the value stored at the accumulator is being changed. 
 
 
 
-5.	What changes are necessary to the PRISM datapath to add another instruction (SUBI, which would subtract an immediate value from the accumulator) to the instruction set?
+ 5	What changes are necessary to the PRISM datapath to add another instruction (SUBI, which would subtract an immediate value from the accumulator) to the instruction set?
 
 Another bit would have to be added to the input and logic in order for thereto be enough room. It would be easier to just change one of the other commands to the appropriate logic or just manualy input the two's complement of the number
 
