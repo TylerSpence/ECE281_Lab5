@@ -40,6 +40,11 @@ By analyzing the piece of PRISM code provided to us, I determined that the code 
 
 #Discussion of second part prism program.
 
+The second program works according to the following logic chart.
+![alt tag] (https://raw.githubusercontent.com/TylerSpence/ECE281_Lab5/master/logic.jpg)
+
+As seen in the comments for the actual code, it checks for the transition between the 9's and 10's by adding 6 and then having a 0 jump. This works because the output should be a 10 when the hex value is A. A plus 6 is 0, thus, when an A comes up, the value jumps to a different logic set to output a 0 instead of A. The same logic works for counting down, but by adding 1 because 0 minus 1 is F.
+
 #Answer to Prism Questions
 
 #debugging
